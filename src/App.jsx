@@ -1,43 +1,34 @@
 import './styles.css';
-import useScrollReveal from './hooks/useScrollReveal';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import FloatingContact from './components/FloatingContact';
+import Layout from './components/Layout';
 
-import Hero from './sections/Hero';
+import Home from './pages/Home';
+import SpecificationsPage from './pages/SpecificationsPage';
+
 import About from './sections/About';
-import BenefitsStrip from './sections/BenefitsStrip';
 import Features from './sections/Features';
 import Applications from './sections/Applications';
 import Gallery from './sections/Gallery';
-import Specifications from './sections/Specifications';
 import MixingInstructions from './sections/MixingInstructions';
-import Precautions from './sections/Precautions';
-import BrandStatement from './sections/BrandStatement';
 import Contact from './sections/Contact';
 
 export default function App() {
-  useScrollReveal();
-
   return (
-    <>
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <BenefitsStrip />
-        <Features />
-        <Applications />
-        <Gallery />
-        <Specifications />
-        <MixingInstructions />
-        <Precautions />
-        <BrandStatement />
-        <Contact />
-      </main>
-      <Footer />
-      <FloatingContact />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/applications" element={<Applications />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/specifications" element={<SpecificationsPage />} />
+          <Route path="/mixing" element={<MixingInstructions />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<Home />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }

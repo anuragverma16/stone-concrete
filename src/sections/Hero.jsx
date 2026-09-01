@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import stoneLogo from '../assets/stone-logo.png';
 
 export default function Hero() {
@@ -37,20 +38,12 @@ export default function Hero() {
         </p>
 
         <div className="hero-buttons">
-          <a
-            className="btn btn-primary"
-            href="#about"
-            onClick={e => { e.preventDefault(); document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' }); }}
-          >
+          <Link className="btn btn-primary" to="/about">
             Explore Product
-          </a>
-          <a
-            className="btn btn-outline"
-            href="#specifications"
-            onClick={e => { e.preventDefault(); document.querySelector('#specifications')?.scrollIntoView({ behavior: 'smooth' }); }}
-          >
+          </Link>
+          <Link className="btn btn-outline" to="/specifications">
             View Specifications
-          </a>
+          </Link>
         </div>
       </div>
 

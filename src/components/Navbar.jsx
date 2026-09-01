@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import stoneLogo from '../assets/stone-logo.png';
 
 const LINKS = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Features', href: '#features' },
-  { label: 'Applications', href: '#applications' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'Specifications', href: '#specifications' },
-  { label: 'Mixing', href: '#mixing' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', to: '/' },
+  { label: 'About', to: '/about' },
+  { label: 'Features', to: '/features' },
+  { label: 'Applications', to: '/applications' },
+  { label: 'Gallery', to: '/gallery' },
+  { label: 'Specifications', to: '/specifications' },
+  { label: 'Mixing', to: '/mixing' },
+  { label: 'Contact', to: '/contact' },
 ];
 
 export default function Navbar() {
@@ -22,12 +23,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleNavClick = (href) => {
-    setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <>
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
@@ -36,13 +31,14 @@ export default function Navbar() {
         </div>
         <div className="nav-links">
           {LINKS.map(link => (
-            <a
+            <NavLink
               key={link.label}
-              href={link.href}
-              onClick={e => { e.preventDefault(); handleNavClick(link.href); }}
+              to={link.to}
+              end={link.to === '/'}
+              className={({ isActive }) => (isActive ? 'active' : undefined)}
             >
               {link.label}
-            </a>
+            </NavLink>
           ))}
         </div>
         <div
@@ -59,22 +55,24 @@ export default function Navbar() {
 
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         {LINKS.map(link => (
-          <a
+          <NavLink
             key={link.label}
-            href={link.href}
-            onClick={e => { e.preventDefault(); handleNavClick(link.href); }}
+            to={link.to}
+            end={link.to === '/'}
+            onClick={() => setMenuOpen(false)}
+            className={({ isActive }) => (isActive ? 'active' : undefined)}
           >
             {link.label}
-          </a>
+          </NavLink>
         ))}
-        <a
+        <NavLink
           className="btn btn-primary"
-          href="#contact"
-          onClick={e => { e.preventDefault(); handleNavClick('#contact'); }}
+          to="/contact"
+          onClick={() => setMenuOpen(false)}
           style={{ marginTop: 12 }}
         >
           Enquire Now
-        </a>
+        </NavLink>
       </div>
     </>
   );

@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function useScrollReveal() {
+  const { pathname } = useLocation();
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       entries => {
@@ -17,5 +20,5 @@ export default function useScrollReveal() {
     revealEls.forEach(el => observer.observe(el));
 
     return () => observer.disconnect();
-  });
+  }, [pathname]);
 }

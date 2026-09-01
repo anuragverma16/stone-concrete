@@ -1,10 +1,50 @@
-import { HardHat, Phone, MessageCircle, MapPin } from 'lucide-react';
+import { useState } from 'react';
+import { HardHat, Phone, MessageCircle, MapPin, Truck, BadgeCheck, ChevronDown } from 'lucide-react';
 
 const PHONE_NUMBER = '+918954730063';
 const WHATSAPP_NUMBER = '918954730063';
 const MAP_ADDRESS = 'Lehra Road, Ravidas Market, Hathras';
 const MAP_DIRECTIONS_URL = 'https://maps.app.goo.gl/hEc9MoCn2vpSykPX6';
 const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(MAP_ADDRESS)}&output=embed`;
+
+const HIGHLIGHTS = [
+  { icon: HardHat, text: 'Premium quality assured' },
+  { icon: Phone, text: 'Fast response time' },
+  { icon: Truck, text: 'Bulk order support' },
+  { icon: BadgeCheck, text: 'Trusted by contractors' },
+];
+
+const FAQS = [
+  {
+    q: 'How much does one bag cover?',
+    a: 'Each 50 KG bag yields approximately 0.028 m³ of mixed concrete — see the Specifications page for full packaging details.',
+  },
+  {
+    q: 'How long can I use the mix after preparing it?',
+    a: 'Use the mixed concrete within 60 minutes of preparation. Do not re-temper with additional water after this window.',
+  },
+  {
+    q: 'What is the shelf life of the product?',
+    a: '3 months from the date of packing when stored in a cool, dry place, off the ground and away from moisture.',
+  },
+  {
+    q: 'Do you support bulk or contractor orders?',
+    a: 'Yes — message us on WhatsApp or call directly with your project requirements and we\'ll get back with the right solution.',
+  },
+];
+
+function FaqItem({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`faq-item${open ? ' open' : ''}`}>
+      <button className="faq-question" onClick={() => setOpen(o => !o)}>
+        <span>{q}</span>
+        <ChevronDown size={18} className="faq-chevron" />
+      </button>
+      {open && <div className="faq-answer">{a}</div>}
+    </div>
+  );
+}
 
 export default function Contact() {
   return (
@@ -21,8 +61,14 @@ export default function Contact() {
             Stone Concrete solution for your construction needs.
           </p>
           <div className="contact-highlights">
-            <div className="ch-item"><HardHat size={16} /> Premium quality assured</div>
-            <div className="ch-item"><Phone size={16} /> Fast response time</div>
+            {HIGHLIGHTS.map(h => {
+              const Icon = h.icon;
+              return (
+                <div className="ch-item" key={h.text}>
+                  <Icon size={16} /> {h.text}
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -62,6 +108,16 @@ export default function Contact() {
         >
           <MapPin size={16} /> {MAP_ADDRESS} · Get Directions
         </a>
+      </div>
+
+      <div className="contact-faq reveal">
+        <div className="section-label">Frequently Asked</div>
+        <h3 className="faq-heading">Common Questions</h3>
+        <div className="faq-list">
+          {FAQS.map(f => (
+            <FaqItem key={f.q} q={f.q} a={f.a} />
+          ))}
+        </div>
       </div>
     </section>
   );

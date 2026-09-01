@@ -1,4 +1,4 @@
-import { Shield, Layers, CheckCircle, Wrench, Cloud } from 'lucide-react';
+import { Shield, Layers, CheckCircle, Wrench, Cloud, Droplet, ShieldCheck, Link2 } from 'lucide-react';
 
 const FEATURES = [
   {
@@ -25,6 +25,21 @@ const FEATURES = [
     icon: Cloud,
     title: 'Suitable for All Weather',
     desc: 'Engineered to perform in varying climatic conditions — from intense heat to cold and wet environments.',
+  },
+  {
+    icon: Droplet,
+    title: 'Water-Reducing Technology',
+    desc: 'Optimised particle packing lowers water demand, improving density and reducing capillary porosity.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Chloride-Free Formulation',
+    desc: 'Free from added chlorides, protecting embedded reinforcement from corrosion over the structure’s lifetime.',
+  },
+  {
+    icon: Link2,
+    title: 'Enhanced Bonding Strength',
+    desc: 'Superior adhesion to existing substrates for repairs, overlays, and composite structural elements.',
   },
 ];
 
