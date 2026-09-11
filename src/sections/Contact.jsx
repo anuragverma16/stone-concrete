@@ -3,6 +3,8 @@ import { HardHat, Phone, MessageCircle, MapPin, Truck, BadgeCheck, ChevronDown }
 
 const PHONE_NUMBER = '+918954730063';
 const WHATSAPP_NUMBER = '918954730063';
+
+const DELIVERY_AGENT = { name: 'Delivery Agent', role: 'Delivery & Dispatch', phone: PHONE_NUMBER };
 const MAP_ADDRESS = 'Lehra Road, Ravidas Market, Hathras';
 const MAP_DIRECTIONS_URL = 'https://maps.app.goo.gl/hEc9MoCn2vpSykPX6';
 const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(MAP_ADDRESS)}&output=embed`;
@@ -87,6 +89,43 @@ export default function Contact() {
           >
             <Phone size={18} /> Call {PHONE_NUMBER}
           </a>
+
+          <div className="contact-actions-divider">
+            <span>Connect With an Agent</span>
+          </div>
+
+          <div className="agent-card agent-card-animated agent-card-highlight" key={DELIVERY_AGENT.phone}>
+            <div className="agent-card-badge">Priority Support</div>
+            <div className="agent-avatar-wrap">
+              <span className="agent-avatar-ping" />
+              <div className="agent-avatar">
+                <Truck size={20} />
+              </div>
+            </div>
+            <div className="agent-name">{DELIVERY_AGENT.name}</div>
+            <div className="agent-role">{DELIVERY_AGENT.role}</div>
+            <div className="agent-status">
+              <span className="agent-status-dot" /> Available Now
+            </div>
+            <div className="agent-actions">
+              <a
+                className="agent-btn agent-btn-whatsapp"
+                href={`https://wa.me/${DELIVERY_AGENT.phone.replace('+', '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Chat with ${DELIVERY_AGENT.name} on WhatsApp`}
+              >
+                <MessageCircle size={16} />
+              </a>
+              <a
+                className="agent-btn agent-btn-call"
+                href={`tel:${DELIVERY_AGENT.phone}`}
+                aria-label={`Call ${DELIVERY_AGENT.name}`}
+              >
+                <Phone size={16} />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
